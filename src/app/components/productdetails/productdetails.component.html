@@ -1,0 +1,30 @@
+<section *ngIf="producDetails">
+    <div class="container">
+        <div class="row g-4 align-item-center mt-5">
+            <div class="col-md-3">
+                <owl-carousel-o [options]=" productOption">
+
+                    <ng-container *ngFor="let path of producDetails.images">
+                      <ng-template carouselSlide >
+                        <img [src]="path" >
+                      </ng-template>
+                    </ng-container>
+                
+                  </owl-carousel-o>
+            </div>
+            <div class="col-md-9">
+                <div>
+                    <h2 class="h5">{{producDetails.title}}</h2>
+                    <p class="text-muted small">{{producDetails.description}}</p>
+                    <span>{{producDetails.category.name}}</span>
+                    <div class="d-flex justify-content-between align-item-center">
+                        <span>{{producDetails.price | currency: 'EGP'}}</span>
+                        <span><i class="fas fa-star rating-color"></i>{{producDetails.ratingsAverage}}</span>
+                    </div>
+                </div>
+                <button (click)="addProduct(producDetails._id,btnAdd)" #btnAdd  class="main-btn w-100 mt-5">+Add To Cart</button>
+            </div>
+        </div>
+    </div>
+   
+</section>

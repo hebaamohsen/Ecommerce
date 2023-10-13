@@ -1,0 +1,44 @@
+<section>
+    <div class="container-fluid">
+        <div class="row mt-3 g-4">
+            <div *ngFor="let item of productsData  | paginate: { id: 'productPaginate',itemsPerPage: pageSize,currentPage: currentPage,totalItems: total }" class="col-sm-6 col-md-4 col-lg-2">
+                <div  class="product mb-4" >
+                    <div [routerLink]="['/productdetails',item._id]" role="button">
+                        <img class="w-100" [src]="item.imageCover" alt="">
+                        <h4 class="font-sm text-main">{{item.category.name}}</h4>
+                        <h3 class="font-sm">{{item.title | cuttext}}</h3>
+                        <div >
+                            <span>{{item.price | currency : "EGP"}}</span>
+                            <p class="mb-0">
+                                <i  [class.rating-color]="item.ratingsAverage >= num" class="fa-solid fa-star " *ngFor="let num of [1,2,3,4,5]"></i> 
+                                <span>{{item.ratingsAverage}}</span>
+                            </p>
+                        </div>
+                    </div>
+                   
+                    <button (click)="addProduct(item._id,btnAdd)" class="main-btn w-100" #btnAdd>+ Add To Cart</button>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+
+
+   <div class="d-flex justify-content-center mt-4">
+    <pagination-controls  id="productPaginate"
+    (pageChange)="pageChanged($event)"
+    (pageBoundsCorrection)="pageChanged($event)"
+    [maxSize]="9"
+    [directionLinks]="true"
+    [autoHide]="true"
+    [responsive]="true"
+    previousLabel="Previous"
+    nextLabel="Next"
+    screenReaderPaginationLabel="Pagination"
+    screenReaderPageLabel="page"
+    screenReaderCurrentLabel="You're on page">
+</pagination-controls>
+   </div>
+    
+</section>
+

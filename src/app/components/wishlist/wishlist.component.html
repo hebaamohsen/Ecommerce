@@ -1,0 +1,25 @@
+<section>
+    <div class="container-fluid">
+        <div class="row mt-3 g-4">
+            <div *ngFor="let item of products" class="col-sm-6 col-md-4 col-lg-2">
+                <div  class="product mb-4" >
+                    <i *ngIf="!wishlistData.includes($any(item._id))" (click)="addFav(item._id)" class="fa-sharp fa-regular fa-heart heart" style="color: #eb0000;" role="button"></i>
+                    <i *ngIf="wishlistData.includes($any(item._id))"  (click)="removeFav(item._id)" class="fa-sharp fa-solid fa-heart fa-2x heart" style="color: #ff0000;" role="button"></i>
+                    <div [routerLink]="['/productdetails',item._id]" role="button">
+                        <img class="w-100" [src]="item.imageCover" alt="">
+                        <h4 class="font-sm text-main">{{item.category.name}}</h4>
+                        <h3 class="font-sm">{{item.title | cuttext}}</h3>
+                        <div class="d-flex justify-content-between">
+                            <span>{{item.price | currency : "EGP"}}</span>
+                            <span><i class="fa-solid fa-star rating-color"></i> {{item.ratingsAverage}}</span>
+                        </div>
+                    </div>
+                   
+                    <button (click)="addProduct(item._id,btnAdd)" class="main-btn w-100" #btnAdd>+ Add To Cart</button>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+    
+</section>

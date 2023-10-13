@@ -1,0 +1,29 @@
+<section *ngIf="step1" class="w-50 mx-auto rounded bg-main-light p-3 shadow">
+    <form [formGroup]="forgetForm" (ngSubmit)="forgetPassword()">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="email" class="form-control" formControlName="email">
+        <button class="main-btn w-100 mt-3">Forget Password</button>
+        <p class="alert alert-danger w-75 mx-auto p-1 mb-0" *ngIf="userMsg">{{userMsg}}</p>
+    </form>
+</section>
+
+<section *ngIf="step2" class="w-50 mx-auto rounded bg-main-light p-3 shadow">
+    <form [formGroup]="resetCodeForm" (ngSubmit)="resetCode()">
+        <label for="resetCode">Reset Code</label>
+        <input type="resetCode" name="resetCode" id="resetCode" placeholder="resetCode" class="form-control" formControlName="resetCode" >
+        <button class="main-btn w-100 mt-3">Reset Code</button>
+        <p class="alert alert-danger w-75 mx-auto p-1 mb-0" *ngIf="userMsg">{{userMsg}}</p>
+    </form>
+</section>
+
+<section *ngIf="step3" class="w-50 mx-auto rounded bg-main-light p-3 shadow">
+    <form [formGroup]="newPasswordForm" (ngSubmit)="newPassword()">
+        <label for="newPassword">Reset Password</label>
+        <input type="password" name="newPassword" id="newPassword" placeholder="newPassword" class="form-control" formControlName="newPassword">
+        <button class="main-btn w-100 mt-3">Reset Password</button>
+        <p class="alert alert-danger w-75 mx-auto p-1 mb-0" *ngIf="userMsg">{{userMsg}}</p>
+        <div class="alert alert-danger" *ngIf="newPasswordForm.get('password')?.touched && newPasswordForm.get('password')?.errors">
+            <p *ngIf="newPasswordForm.get('password')?.getError('pattern')"> Password must be at least 6 charachters</p>
+        </div>
+    </form>
+</section>
